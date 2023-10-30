@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image URL Validator</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+
+      .container {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        text-align: center;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      p {
+        font-weight: bold;
+        color: #007bff;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Image URL Validator</h1>
+      <input type="text" id="imageUrlInput" placeholder="Enter Image URL" />
+      <button>Validate</button>
+      <p id="resultMessage"></p>
+    </div>
+
+    <script>
+      const imageURLInput = document.querySelector("#imageUrlInput");
+      function isValidImageUrl(url) {
+        return new Promise((resolve) => {
+          const img = new Image();
+          img.onload = function () {
+            resolve(true);
+          };
+          img.onerror = function () {
+            resolve(false);
+          };
+          img.src = url;
+        });
+      }
+
+      imageUrlInput.addEventListener("input", (e) => {
+        const imageUrl = e.target.value;
+        isValidImageUrl(imageUrl).then((isValid) => {
+          if (isValid) {
+            console.log("success");
+          } else {
+            console.log("fail");
+          }
+        });
+      });
+
+      // local image
+      // function validateImage() {
+      //   const imageInput = document.getElementById("#imageUrlInput");
+      //   const file = imageInput.files[0];
+
+      //   if (file) {
+      //     // Check if the file type is an image (e.g., JPEG, PNG, GIF)
+      //     if (file.type.startsWith("image/")) {
+      //       console.log("The selected file is a valid image.");
+      //     } else {
+      //       console.log("The selected file is not a valid image.");
+      //     }
+      //   } else {
+      //     console.log("No file selected.");
+      //   }
+      // }
+    </script>
+  </body>
+</html>

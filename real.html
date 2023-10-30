@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Image URL Validation</title>
+  </head>
+  <body>
+    <input type="text" id="imageUrlInput" placeholder="Enter Image URL" />
+    <button onclick="validateImageUrl()">Validate Image URL</button>
+
+    <script>
+      function isValidImageUrl(url) {
+        // Define a regular expression pattern to match image URLs (modify as needed).
+        const imageUrlPattern = /\.(jpeg|jpg|gif|png|webp|bmp|svg|tiff)$/i;
+
+        return imageUrlPattern.test(url);
+      }
+
+      function validateImageUrl() {
+        const imageUrlInput = document.getElementById("imageUrlInput");
+        const imageUrl = imageUrlInput.value;
+
+        if (isValidImageUrl(imageUrl)) {
+          console.log("The entered URL appears to be a valid image URL.");
+        } else {
+          console.log("The entered URL is not a valid image URL.");
+        }
+      }
+    </script>
+  </body>
+</html>
